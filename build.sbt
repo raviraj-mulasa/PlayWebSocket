@@ -1,7 +1,3 @@
-enablePlugins {
-  JavaAppPackaging
-}
-
 import Dependencies._
 
 maintainer          := "RaviRaj Mulasa <raviraj.mg@gmail.com>"
@@ -33,6 +29,7 @@ lazy val server = (project in file("server")).
 lazy val playwebsocket = (project in file(".")).
   aggregate(server).
   dependsOn(server).
+  enablePlugins(JavaAppPackaging).
   settings(buildSettings: _*).
   settings(
 

@@ -9,4 +9,5 @@ object Main extends App {
 
   val LOGGER = LoggerFactory.getLogger(this.getClass)
   LOGGER.info("Hello World")
+  Thread.sleep(10 * 60 * 1000)
 }
