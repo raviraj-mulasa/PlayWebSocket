@@ -4,11 +4,17 @@ import Keys._
 object Dependencies {
 
 
-//  testing related
+//  Testing related
   val scalatestVersion  = "3.0.1"
-  val scalatest = "org.scalatest" %% "scalatest" % scalatestVersion % "test"
+  val scalatest         = "org.scalatest" %% "scalatest" % scalatestVersion % "test"
+  val junitVersion      = "4.12"
+  val junit             = "junit" % "junit" % junitVersion % "test"
+  lazy val testingDeps  = Seq(
+    junit,
+    scalatest
+  )
 
-//  logging related
+//  Logging related
   val slf4jVersion      = "1.7.22"
   val logbackVersion    = "1.1.8"
   val slf4j             = "org.slf4j" % "slf4j-api" % slf4jVersion
@@ -26,6 +32,7 @@ object Dependencies {
     logbackClassic
   )
 
+  val commonDeps        = (testingDeps ++ loggingDeps)
 
 //  Database related
   val slickVersion              = "3.1.1"

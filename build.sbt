@@ -18,7 +18,7 @@ lazy val buildSettings = Seq(
 lazy val db = (project in file("db")).
   settings(buildSettings: _*).
   settings(
-    libraryDependencies ++= loggingDeps,
+    libraryDependencies ++= commonDeps,
     libraryDependencies ++= databaseDeps
   )
 
@@ -26,7 +26,7 @@ lazy val server = (project in file("server")).
   dependsOn(db).
   settings(buildSettings: _*).
   settings(
-    libraryDependencies ++= loggingDeps
+    libraryDependencies ++= commonDeps
   )
 
 
@@ -51,9 +51,13 @@ lazy val playwebsocket = (project in file(".")).
 
     // append -deprecation to the options passed to the Scala compiler
     scalacOptions ++= Seq(
+      "-unchecked",
       "-deprecation",
       "-feature",
-      "-language:reflectiveCalls"
+      "-language:reflectiveCalls",
+      "-encoding",
+      "utf8",
+      "-language:postfixOps"
     ),
 
     // set the initial commands when entering 'console' or 'consoleQuick', but not 'consoleProject'
@@ -127,13 +131,13 @@ lazy val playwebsocket = (project in file(".")).
 //copy files under 'conf' folder to 'config' in the package
 mappings in Universal ++= {
   (baseDirectory.value / "conf" * "*").get.map { f =>
-    f -> s"config/${f.name}"
+    f -> s"conf/${f.name}"
   }
 }
 
 //copy bash scripts under 'scripts'  folder to 'scripts' in the package
 mappings in Universal ++= {
   (baseDirectory.value / "scripts" * "*").get.map { f =>
-    f -> s"scripts/${f.name}"
+    f -> s"bin/${f.name}"
   }
 }

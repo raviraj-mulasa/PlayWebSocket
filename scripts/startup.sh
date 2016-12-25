@@ -83,4 +83,9 @@ JMX_OPTS="
 -Dcom.sun.management.jmxremote.ssl=false \
 "
 
-nohup java -Dprocess.name=$PROCESS_NAME -Xms1024m -Xmx1024m $JAVA_OPTS -Dlogback.configurationFile=file://$BASEDIR/config/logback.xml -Dserver.home=$BASEDIR -cp $libraries net.geekscore.db.Main &
+nohup java -Dprocess.name=$PROCESS_NAME \
+-Xms1024m -Xmx1024m \
+$JAVA_OPTS \
+-Dlogback.configurationFile=file://$BASEDIR/conf/logback.xml \
+-Dserver.home=$BASEDIR \
+-cp $libraries net.geekscore.db.Main &
