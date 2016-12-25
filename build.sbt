@@ -125,14 +125,14 @@ lazy val playwebsocket = (project in file(".")).
 
   )
 
-//copy files under 'conf' folder to 'config' in the package
+//copy files under 'conf' folder to 'conf' in the package
 mappings in Universal ++= {
   (baseDirectory.value / "conf" * "*").get.map { f =>
     f -> s"conf/${f.name}"
   }
 }
 
-//copy bash scripts under 'scripts'  folder to 'scripts' in the package
+//copy bash scripts under 'scripts'  folder to 'bin' in the package
 mappings in Universal ++= {
   (baseDirectory.value / "scripts" * "*").get.map { f =>
     f -> s"bin/${f.name}"
