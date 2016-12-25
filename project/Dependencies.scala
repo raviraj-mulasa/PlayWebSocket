@@ -6,7 +6,7 @@ object Dependencies {
 
 //  testing related
   val scalatestVersion  = "3.0.1"
-  val scalatest = "org.scalatest" %% "scalatest" % scalatestVersion
+  val scalatest = "org.scalatest" %% "scalatest" % scalatestVersion % "test"
 
 //  logging related
   val slf4jVersion      = "1.7.22"
@@ -32,11 +32,11 @@ object Dependencies {
   val postgresqlJDBCVersion     = "9.4.1212.jre7"
   val hikariCPVersion           = "2.5.1"
   val flywayVersion             = "4.0.3"
-  val slick             = "org.slf4j" % "log4j-over-slf4j" % slf4jVersion
-  val postgresqlJDBC    = "org.postgresql" % "postgresql" % postgresqlJDBCVersion
-  val hikariCP          = "com.zaxxer" % "HikariCP" % hikariCPVersion
-  val flyway            = "org.flywaydb" % "flyway-core" % flywayVersion
-  lazy val databaseDeps = Seq(
+  val slick                     = "org.slf4j" % "log4j-over-slf4j" % slf4jVersion
+  val postgresqlJDBC            = "org.postgresql" % "postgresql" % postgresqlJDBCVersion
+  val hikariCP                  = "com.zaxxer" % "HikariCP" % hikariCPVersion
+  val flyway                    = "org.flywaydb" % "flyway-core" % flywayVersion % "test"
+  lazy val databaseDeps         = Seq(
     slick,
     hikariCP,
     postgresqlJDBC,

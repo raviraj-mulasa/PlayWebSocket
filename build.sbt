@@ -1,10 +1,18 @@
+enablePlugins {
+  JavaAppPackaging
+}
+
 import Dependencies._
+
+maintainer          := "RaviRaj Mulasa <raviraj.mg@gmail.com>"
+packageSummary      := "Play WebSocket"
+packageDescription  := "WebSockets using Play Akka and Slick"
 
 // factor out common settings into a sequence
 lazy val buildSettings = Seq(
-  organization := "net.geekscore",
-  version := "1.0",
-  scalaVersion := "2.11.6"
+  organization  := "net.geekscore",
+  version       := "1.0",
+  scalaVersion  := "2.11.6"
 )
 
 lazy val db = (project in file("db")).
@@ -75,15 +83,15 @@ lazy val playwebsocket = (project in file(".")).
 
     // only show warnings and errors on the screen for compilations.
     //  this applies to both test:compile and compile and is Info by default
-    logLevel in compile := Level.Debug,
+    logLevel in compile := Level.Info,
 
     // only show warnings and errors on the screen for all tasks (the default is Info)
     //  individual tasks can then be more verbose using the previous setting
-    logLevel := Level.Debug,
+    logLevel := Level.Info,
 
     // only store messages at info and above (the default is Debug)
     //   this is the logging level for replaying logging with 'last'
-    persistLogLevel := Level.Debug,
+    persistLogLevel := Level.Info,
 
     // add SWT to the unmanaged classpath
 //    unmanagedJars in Compile += Attributed.blank(file("/usr/share/java/swt.jar")),
@@ -116,5 +124,16 @@ lazy val playwebsocket = (project in file(".")).
 
   )
 
+//copy files under 'conf' folder to 'config' in the package
+mappings in Universal ++= {
+  (baseDirectory.value / "conf" * "*").get.map { f =>
+    f -> s"config/${f.name}"
+  }
+}
 
-enablePlugins(JavaAppPackaging)
+//copy bash scripts under 'scripts'  folder to 'scripts' in the package
+mappings in Universal ++= {
+  (baseDirectory.value / "scripts" * "*").get.map { f =>
+    f -> s"scripts/${f.name}"
+  }
+}
